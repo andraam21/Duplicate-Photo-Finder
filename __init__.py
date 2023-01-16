@@ -1,17 +1,36 @@
 from difPy.dif import dif
 
-search = dif("/mnt/e/vs_code_structura_c/ProiectPython/Photos")
-print("\n")
-
-print("CRITERII DUPA CARE S-A REALIZAT CAUTAERA:")
-for key, value in search.stats.items():
-    print(key, value)
+if _name_ == "_main_":
+    search = dif("/mnt/e/ProiectPython/Photos")
     
-# print(search.stats)
-print()
-print("DUPLICATED PHOTOS \n" )
-for key in search.result:
-    print(search.result[key]['duplicates'])
+  
+    print()
+    print("What search criteria do we use?:")
+    for key, value in search.stats.items():
+        print(key, end=" --- ")
+        try:
+            for j in value:
+                print(j, end="")
+        except:
+            print(value, end="")
+        
+        print()
+        
+    print()
+    print("A list of duplicates/similar images that have the lowest quality:" )
+    for key, value in search.result.items():
+        print("ID ===> " + key, end="")
+        print(" : ", end="")
+        for i in value['duplicates']:
+            print("PATH ===> " + i, end=" ")
+        print()
+    
     print()
     
-print(search.result)
+    
+    # Putem modifica parmaetrii de cautare dupa cum dorim
+    search = dif("/mnt/e/ProiectPython/Photos", recursive=False, similarity="low", px_size=1000, show_progress=True, show_output=True, delete=False)
+    
+    print()
+    
+    print("PICHUNTER ==> PYTHON STRONG")
